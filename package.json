@@ -1,15 +1,15 @@
 {
-  "name": "json-c",
+  "name": "jsonc.min",
   "version": "0.1.0",
   "description": "✨ Safer JSON and JSONC minify, parse and stringify for JavaScript (Browser compatible).",
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wellwelwel/json-c.git"
+    "url": "git+https://github.com/wellwelwel/jsonc.min.git"
   },
   "bugs": {
-    "url": "https://github.com/wellwelwel/json-c/issues"
+    "url": "https://github.com/wellwelwel/jsonc.min/issues"
   },
   "author": "https://github.com/wellwelwel",
   "funding": {
@@ -47,9 +47,9 @@
     "jsonc",
     "minify",
     "minifier",
-    "pase",
-    "paser",
-    "strigify",
+    "parse",
+    "parser",
+    "stringify",
     "jsonc-to-json"
   ]
 }

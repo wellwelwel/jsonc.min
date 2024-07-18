@@ -23,7 +23,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           release-type: node
-          package-name: json-c
+          package-name: jsonc.min
           changelog-path: 'CHANGELOG.md'
 
       - name: ➕ Actions - Checkout
@@ -49,7 +49,7 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         run: npm ci
 
-      - name: 🚀 Building JSON-C
+      - name: 🚀 Building jsonc.min
         if: ${{ steps.release.outputs.releases_created }}
         run: npm run build
 

@@ -39,7 +39,7 @@ Where possible, provide an error test case that the fix covers.
 
 ### Features
 
-It's better to discuss an **API** before actually start implementing it. You can open an [**Issue on Github**](https://github.com/wellwelwel/json-c/issues/new), so we can discuss the **API** design implementation ideas.
+It's better to discuss an **API** before actually start implementing it. You can open an [**Issue on Github**](https://github.com/wellwelwel/jsonc.min/issues/new), so we can discuss the **API** design implementation ideas.
 
 > Please ensure test cases to cover new features.
 
