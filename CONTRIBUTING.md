@@ -47,38 +47,10 @@ It's better to discuss an **API** before actually start implementing it. You can
 
 ## Testing
 
-### General (recommended)
-
-#### Sequential and Parallel
-
-```sh
-npm run test                  # Test with the locally installed Node.js version
-npm run test:bun              # Test with the locally installed Bun version
-npm run test:deno             # Test with the locally installed Deno version
-```
-
-#### Sequential
-
-```sh
-npm run test:sequential       # Test with the locally installed Node.js version
-npm run test:bun:sequential   # Test with the locally installed Bun version
-npm run test:deno:sequential  # Test with the locally installed Deno version
-```
-
-> Pass custom flags using `--`, for example:
->
-> ```sh
-> npm run test:sequential -- --debug --watch # etc.
-> ```
->
-> - Same for **Bun** and **Deno**.
-
-#### Parallel
-
 ```sh
 npm run test:node
 bun run test:bun
-desno task test:deno
+deno task test:deno
 ```
 
 ---
