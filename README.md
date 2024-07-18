@@ -128,7 +128,7 @@ JSONC.parse(content);
 
 Prettify both _JSON_ and _JSONC_.
 
-> Use `JSON.strinfy` behind the scenes.
+> Use `JSON.stringify` behind the scenes.
 
 ```js
 const content = '/** JSONC content */ { "test": true }';
