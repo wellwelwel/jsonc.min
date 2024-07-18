@@ -7,16 +7,16 @@
 
 > Many _JSON_ minification packages rely on vulnerable _regex_, making them unsuitable for production.
 
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/poku/main/.github/assets/readme/check.svg"> **json.min** prioritizes security by avoiding these pitfalls and offering a robust solution.
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/json.min/main/.github/assets/readme/check.svg"> **json.min** prioritizes security by avoiding these pitfalls and offering a robust solution.
 
 #### 🤝 Compatibility
 
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/poku/main/.github/assets/readme/check.svg"> **json.min** ensures full compatibility with both **Node.js**, **Bun**, **Deno** and, browser environments.<br />
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/poku/main/.github/assets/readme/check.svg"> All features work for both _JSON_ and _JSONC_.
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/json.min/main/.github/assets/readme/check.svg"> **json.min** ensures full compatibility with both **Node.js**, **Bun**, **Deno** and, browser environments.<br />
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/json.min/main/.github/assets/readme/check.svg"> All features work for both _JSON_ and _JSONC_.
 
 #### 🪶 Lightweight
 
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/poku/main/.github/assets/readme/check.svg"> Zero dependencies and optimized for production environments.
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/json.min/main/.github/assets/readme/check.svg"> Zero dependencies and optimized for production environments.
 
 ---
 
