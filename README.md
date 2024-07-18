@@ -7,11 +7,11 @@
 
 > Many _JSON_ minification packages rely on vulnerable _regex_, making them unsuitable for production.
 
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/jsonc.min/main/.github/assets/readme/check.svg"> **json.min** prioritizes security by avoiding these pitfalls and offering a robust solution.
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/jsonc.min/main/.github/assets/readme/check.svg"> **jsonc.min** prioritizes security by avoiding these pitfalls and offering a robust solution.
 
 #### 🤝 Compatibility
 
-<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/jsonc.min/main/.github/assets/readme/check.svg"> **json.min** ensures full compatibility with both **Node.js**, **Bun**, **Deno** and, browser environments.<br />
+<img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/jsonc.min/main/.github/assets/readme/check.svg"> **jsonc.min** ensures full compatibility with both **Node.js**, **Bun**, **Deno** and, browser environments.<br />
 <img width="16" height="16" alt="check" src="https://raw.githubusercontent.com/wellwelwel/jsonc.min/main/.github/assets/readme/check.svg"> All features work for both _JSON_ and _JSONC_.
 
 #### 🪶 Lightweight
@@ -23,7 +23,7 @@
 ## Install
 
 ```bash
-npm i json.min
+npm i jsonc.min
 ```
 
 ---
@@ -33,11 +33,11 @@ npm i json.min
 ### Import
 
 ```js
-import { JSONC } from 'json.min';
+import { JSONC } from 'jsonc.min';
 ```
 
 ```js
-const { JSONC } = require('json.min');
+const { JSONC } = require('jsonc.min');
 ```
 
 ---
@@ -156,7 +156,7 @@ JSONC.stringify(content, null, 2);
 
 ```ts
 import { readFile } from 'node:fs/promises';
-import { JSONC } from 'json.min';
+import { JSONC } from 'jsonc.min';
 
 const content = await readFile('./file.jsonc', 'utf-8');
 
@@ -168,7 +168,7 @@ JSONC.parse(content);
 For this example, let's assume a `.configrc` that can be both a _JSON_ or a _JSONC_, as well as looking for both `config.json` and `config.jsonc` files:
 
 ```ts
-import { JSONC } from 'json.min';
+import { JSONC } from 'jsonc.min';
 import { cwd } from 'node:process';
 import { join } from 'node:path';
 import { readFile } from 'node:fs/promises';
@@ -186,7 +186,7 @@ export const getConfigs = async (customPath?: string) => {
     try {
       const configsFile = await readFile(filePath, 'utf-8');
 
-      // json.min will parse both JSON and JSONC extensions, even if there is no extension.
+      // jsonc.min will parse both JSON and JSONC extensions, even if there is no extension.
       return JSONC.parse(configsFile);
     } catch {
       return {};
@@ -199,4 +199,4 @@ export const getConfigs = async (customPath?: string) => {
 
 ## Acknowledgements
 
-[![Contributors](https://img.shields.io/github/contributors/wellwelwel/json.min?label=Contributors)](https://github.com/wellwelwel/json.min/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/wellwelwel/jsonc.min?label=Contributors)](https://github.com/wellwelwel/jsonc.min/graphs/contributors)
