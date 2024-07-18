@@ -44,7 +44,7 @@ const { JSONC } = require('jsonc.min');
 
 ### `toJSON`
 
-Convert _JSONC_ to _JSON_.
+Convert from _JSONC_ to _JSON_.
 
 ```js
 JSONC.toJSON('/* JSONC content */ { "test": true }');
