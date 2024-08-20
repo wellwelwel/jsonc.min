@@ -59,10 +59,10 @@ class JsoncProcessor {
     return result;
   }
 
-  parse(
+  parse<T = unknown>(
     text: string,
     reviver?: (this: unknown, key: string, value: unknown) => unknown
-  ): string {
+  ): T {
     const cleanContent = this.toJSON(text);
 
     return JSON.parse(cleanContent, reviver);
