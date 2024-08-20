@@ -1,6 +1,6 @@
 {
   "name": "jsonc.min",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "✨ Safer JSON and JSONC minify, parse and stringify for JavaScript (Browser compatible).",
   "main": "./lib/index.js",
   "license": "MIT",
