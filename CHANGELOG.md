@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1](https://github.com/wellwelwel/jsonc.min/compare/v1.0.0...v1.0.1) (2024-08-20)
+
+
+### Bug Fixes
+
+* **typings:** support generic type parameter to `parse` method ([#7](https://github.com/wellwelwel/jsonc.min/issues/7)) ([fea1d02](https://github.com/wellwelwel/jsonc.min/commit/fea1d029c00b8fa9f2de318209ce54a9eb171532))
+
+
+### Performance Improvements
+
+* improve `toJSON` performance ([#5](https://github.com/wellwelwel/jsonc.min/issues/5)) ([e23bc16](https://github.com/wellwelwel/jsonc.min/commit/e23bc16edd1b76cd3c1a98f622bfa5301b6385dd))
+
 ## 1.0.0 (2024-07-18)
 
 
