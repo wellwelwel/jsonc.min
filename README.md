@@ -31,8 +31,21 @@
 
 ## Install
 
+[![Install Size](https://packagephobia.com/badge?p=jsonc.min)](https://pkg-size.dev/jsonc.min)
+
 ```bash
+# Node.js
 npm i jsonc.min
+```
+
+```bash
+# Bun
+bun add jsonc.min
+```
+
+```bash
+# Deno
+deno add npm:jsonc.min
 ```
 
 ---
