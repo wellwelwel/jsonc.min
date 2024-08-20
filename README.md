@@ -1,7 +1,7 @@
 <h1 align="center">jsonc.min</h1>
 <div align="center">
 
-[![NPM Downloads](https://img.shields.io/npm/v/jsonc.min.svg?label=&color=70a1ff&logo=npm&logoColor=white)](https://www.npmjs.com/package/jsonc.min)
+[![NPM Version](https://img.shields.io/npm/v/jsonc.min.svg?label=&color=70a1ff&logo=npm&logoColor=white)](https://www.npmjs.com/package/jsonc.min)
 [![GitHub Workflow Status (Node.js)](https://img.shields.io/github/actions/workflow/status/wellwelwel/jsonc.min/ci_node.yml?event=push&label=&branch=main&logo=nodedotjs&logoColor=535c68&color=badc58)](https://github.com/wellwelwel/jsonc.min/actions/workflows/ci_node.yml?query=branch%3Amain)
 [![GitHub Workflow Status (Bun)](https://img.shields.io/github/actions/workflow/status/wellwelwel/jsonc.min/ci_bun.yml?event=push&label=&branch=main&logo=bun&logoColor=ffffff&color=f368e0)](https://github.com/wellwelwel/jsonc.min/actions/workflows/ci_bun.yml?query=branch%3Amain)
 [![GitHub Workflow Status (Deno)](https://img.shields.io/github/actions/workflow/status/wellwelwel/jsonc.min/ci_deno.yml?event=push&label=&branch=main&logo=deno&logoColor=ffffff&color=218c74)](https://github.com/wellwelwel/jsonc.min/actions/workflows/ci_deno.yml?query=branch%3Amain)
