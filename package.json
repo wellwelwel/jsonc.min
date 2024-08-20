@@ -26,9 +26,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "test:node": "poku --platform=node --parallel",
-    "test:bun": "poku --platform=bun --parallel",
-    "test:deno": "poku --platform=deno --parallel",
+    "test:node": "poku --node -p",
+    "test:bun": "poku --bun -p",
+    "test:deno": "poku --deno -p",
     "lint": "npx @biomejs/biome lint && prettier --check .",
     "lint:fix": "npx @biomejs/biome lint --write && prettier --write .github/workflows/*.yml .",
     "update": "pu minor && npm i && npm audit fix",
@@ -37,10 +37,10 @@
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "packages-update": "^2.0.0",
-    "poku": "^2.0.0",
+    "poku": "^2.5.0",
     "prettier": "^3.3.3",
-    "tsx": "^4.16.2",
-    "typescript": "^5.5.3"
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
   },
   "keywords": [
     "json",
