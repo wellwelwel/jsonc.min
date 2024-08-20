@@ -6,7 +6,7 @@
 [![GitHub Workflow Status (Bun)](https://img.shields.io/github/actions/workflow/status/wellwelwel/jsonc.min/ci_bun.yml?event=push&label=&branch=main&logo=bun&logoColor=ffffff&color=f368e0)](https://github.com/wellwelwel/jsonc.min/actions/workflows/ci_bun.yml?query=branch%3Amain)
 [![GitHub Workflow Status (Deno)](https://img.shields.io/github/actions/workflow/status/wellwelwel/jsonc.min/ci_deno.yml?event=push&label=&branch=main&logo=deno&logoColor=ffffff&color=079992)](https://github.com/wellwelwel/jsonc.min/actions/workflows/ci_deno.yml?query=branch%3Amain)
 
-✨ Safer <strong>JSON</strong> and <strong>JSONC</strong> minify, parse and stringify for <strong>JavaScript</strong> (<strong>Browser</strong> compatible).
+✨ Faster and safer <strong>JSON</strong> and <strong>JSONC</strong> minify, parse and stringify for <strong>JavaScript</strong> (<strong>Browser</strong> compatible) — **9kB**.
 
 </div>
 
