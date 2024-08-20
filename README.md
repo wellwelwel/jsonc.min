@@ -210,9 +210,9 @@ export const getConfigs = async (customPath?: string) => {
 
       // jsonc.min will parse both JSON and JSONC extensions, even if there is no extension.
       return JSONC.parse(configsFile);
-    } catch {
-      return {};
-    }
+    } catch {}
+
+    return {};
   }
 };
 ```
