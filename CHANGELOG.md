@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/wellwelwel/jsonc.min/compare/v1.0.1...v1.1.0) (2024-08-22)
+
+
+### Features
+
+* support for direct (global) browser import ([#15](https://github.com/wellwelwel/jsonc.min/issues/15)) ([d4c1c8e](https://github.com/wellwelwel/jsonc.min/commit/d4c1c8e4ee718350a8f8aa9eb2e507448d50b86e))
+
 ## [1.0.1](https://github.com/wellwelwel/jsonc.min/compare/v1.0.0...v1.0.1) (2024-08-20)
 
 
