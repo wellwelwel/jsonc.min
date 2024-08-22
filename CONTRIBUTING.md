@@ -53,6 +53,8 @@ bun run test:bun
 deno task test:deno
 ```
 
+Also, run `npm run build` to compile and run _E2E_ tests in the virtual browser.
+
 ---
 
 ### Lint

@@ -1,7 +1,7 @@
 {
   "name": "jsonc.min",
   "version": "1.0.1",
-  "description": "✨ Faster and safer JSON and JSONC minify, parse and stringify for JavaScript (Browser compatible) — 2.6kB.",
+  "description": "✨ Faster and safer JSON and JSONC minify, parse and stringify for JavaScript (Browser compatible) — 2.3kB.",
   "main": "./lib/index.js",
   "license": "MIT",
   "repository": {
@@ -17,6 +17,7 @@
     "url": "https://github.com/sponsors/wellwelwel"
   },
   "files": [
+    "browser",
     "lib"
   ],
   "engines": {
@@ -25,17 +26,23 @@
     "deno": ">=1.30.0"
   },
   "scripts": {
-    "build": "tsc",
+    "prebuild": "rm -rf ./browser ./lib",
+    "build:browser": "tsx tools/browserfy.ts",
+    "build": "tsc && npm run build:browser",
     "test:node": "poku --node -p",
     "test:bun": "poku --bun -p",
     "test:deno": "poku --deno -p",
     "lint": "npx @biomejs/biome lint && prettier --check .",
     "lint:fix": "npx @biomejs/biome lint --write && prettier --write .github/workflows/*.yml .",
     "update": "pu minor && npm i && npm audit fix",
-    "postupdate": "npm run lint:fix"
+    "postupdate": "npm run lint:fix",
+    "size": "ls -lh lib/index.js | awk '{print $5}'"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
+    "@types/node": "^22.5.0",
+    "esbuild": "^0.23.1",
+    "happy-dom": "^15.0.0",
     "packages-update": "^2.0.0",
     "poku": "^2.5.0",
     "prettier": "^3.3.3",
@@ -50,6 +57,12 @@
     "parse",
     "parser",
     "stringify",
-    "jsonc-to-json"
+    "jsonc-to-json",
+    "node",
+    "nodejs",
+    "bun",
+    "deno",
+    "typescript",
+    "browser"
   ]
 }
