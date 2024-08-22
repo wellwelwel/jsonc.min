@@ -1,8 +1,8 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
   "files": {
     "include": ["**/**"],
-    "ignore": ["node_modules", "lib"]
+    "ignore": ["node_modules", "lib", "browser"]
   },
   "linter": {
     "enabled": true,
@@ -24,7 +24,11 @@
         "useImportExtensions": "error"
       },
       "performance": {
-        "all": true
+        "all": true,
+        "noAccumulatingSpread": "error",
+        "noBarrelFile": "error",
+        "noDelete": "error",
+        "noReExportAll": "error"
       },
       "security": {
         "all": true
@@ -48,6 +52,9 @@
       "include": ["test", "tools"],
       "linter": {
         "rules": {
+          "correctness": {
+            "noNodejsModules": "off"
+          },
           "nursery": {
             "useTopLevelRegex": "off"
           }
