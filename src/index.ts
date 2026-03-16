@@ -1,15 +1,19 @@
 export const JSONC = (() => {
   class JsoncProcessor {
     toJSON(content: string): string {
-      const length = content.length;
+      const input =
+        content.charCodeAt(0) === 0xfeff ? content.slice(1) : content;
+
+      const length = input.length;
 
       let inBlockComment = false;
       let inString = false;
       let skipChar = false;
+      let lastCommaIndex = -1;
       let result = '';
 
       for (let i = 0; i < length; i++) {
-        const char = content[i];
+        const char = input[i];
 
         if (skipChar) {
           skipChar = false;
@@ -17,7 +21,7 @@ export const JSONC = (() => {
         }
 
         if (inBlockComment) {
-          if (char === '*' && content[i + 1] === '/') {
+          if (char === '*' && input[i + 1] === '/') {
             inBlockComment = false;
             skipChar = true;
           }
@@ -26,7 +30,7 @@ export const JSONC = (() => {
         }
 
         if (inString) {
-          if (char === '"' && content[i - 1] !== '\\') {
+          if (char === '"' && input[i - 1] !== '\\') {
             inString = false;
           }
 
@@ -40,21 +44,37 @@ export const JSONC = (() => {
           continue;
         }
 
-        if (char === '/' && content[i + 1] === '*') {
+        if (char === '/' && input[i + 1] === '*') {
           inBlockComment = true;
           skipChar = true;
           continue;
         }
 
-        if (char === '/' && content[i + 1] === '/') {
-          while (i < length && content[i] !== '\n') {
+        if (char === '/' && input[i + 1] === '/') {
+          while (i < length && input[i] !== '\n') {
             i++;
           }
 
           continue;
         }
 
-        result += char;
+        if (char === ',') {
+          lastCommaIndex = result.length;
+          result += char;
+        } else if (char === ']' || char === '}') {
+          if (lastCommaIndex !== -1) {
+            result =
+              result.substring(0, lastCommaIndex) +
+              result.substring(lastCommaIndex + 1);
+          }
+          lastCommaIndex = -1;
+          result += char;
+        } else {
+          if (char !== ' ' && char !== '\t' && char !== '\n' && char !== '\r') {
+            lastCommaIndex = -1;
+          }
+          result += char;
+        }
       }
 
       return result;
