@@ -9,7 +9,7 @@ export const JSONC = (() => {
       let inBlockComment = false;
       let inString = false;
       let skipChar = false;
-      let lastCommaIndex = -1;
+      let pending = '';
       let result = '';
 
       for (let i = 0; i < length; i++) {
@@ -39,6 +39,8 @@ export const JSONC = (() => {
         }
 
         if (char === '"') {
+          result += pending;
+          pending = '';
           inString = true;
           result += char;
           continue;
@@ -59,20 +61,15 @@ export const JSONC = (() => {
         }
 
         if (char === ',') {
-          lastCommaIndex = result.length;
-          result += char;
+          pending = ',';
         } else if (char === ']' || char === '}') {
-          if (lastCommaIndex !== -1) {
-            result =
-              result.substring(0, lastCommaIndex) +
-              result.substring(lastCommaIndex + 1);
-          }
-          lastCommaIndex = -1;
+          pending = '';
           result += char;
+        } else if (pending && char <= ' ') {
+          pending += char;
         } else {
-          if (char !== ' ' && char !== '\t' && char !== '\n' && char !== '\r') {
-            lastCommaIndex = -1;
-          }
+          result += pending;
+          pending = '';
           result += char;
         }
       }
