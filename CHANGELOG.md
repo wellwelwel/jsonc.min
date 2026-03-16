@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/wellwelwel/jsonc.min/compare/v1.1.0...v1.1.1) (2026-03-16)
+
+
+### Bug Fixes
+
+* handle trailing commas and BOM-prefixed inputs ([#24](https://github.com/wellwelwel/jsonc.min/issues/24)) ([b5e3bab](https://github.com/wellwelwel/jsonc.min/commit/b5e3bab31c63cc8bc96d2b29415ddfb3ecacc1fa))
+
 ## [1.1.0](https://github.com/wellwelwel/jsonc.min/compare/v1.0.1...v1.1.0) (2024-08-22)
 
 
