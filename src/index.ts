@@ -1,15 +1,20 @@
 export const JSONC = (() => {
   class JsoncProcessor {
     toJSON(content: string): string {
-      const length = content.length;
+      const input =
+        content.charCodeAt(0) === 0xfeff ? content.slice(1) : content;
+
+      const length = input.length;
 
       let inBlockComment = false;
       let inString = false;
+      let escaped = false;
       let skipChar = false;
+      let pending = '';
       let result = '';
 
       for (let i = 0; i < length; i++) {
-        const char = content[i];
+        const char = input[i];
 
         if (skipChar) {
           skipChar = false;
@@ -17,7 +22,7 @@ export const JSONC = (() => {
         }
 
         if (inBlockComment) {
-          if (char === '*' && content[i + 1] === '/') {
+          if (char === '*' && input[i + 1] === '/') {
             inBlockComment = false;
             skipChar = true;
           }
@@ -26,35 +31,49 @@ export const JSONC = (() => {
         }
 
         if (inString) {
-          if (char === '"' && content[i - 1] !== '\\') {
+          if (char === '"' && !escaped) {
             inString = false;
           }
 
+          escaped = char === '\\' && !escaped;
           result += char;
           continue;
         }
 
         if (char === '"') {
+          result += pending;
+          pending = '';
           inString = true;
           result += char;
           continue;
         }
 
-        if (char === '/' && content[i + 1] === '*') {
+        if (char === '/' && input[i + 1] === '*') {
           inBlockComment = true;
           skipChar = true;
           continue;
         }
 
-        if (char === '/' && content[i + 1] === '/') {
-          while (i < length && content[i] !== '\n') {
+        if (char === '/' && input[i + 1] === '/') {
+          while (i < length && input[i] !== '\n') {
             i++;
           }
 
           continue;
         }
 
-        result += char;
+        if (char === ',') {
+          pending = ',';
+        } else if (char === ']' || char === '}') {
+          pending = '';
+          result += char;
+        } else if (pending && char <= ' ') {
+          pending += char;
+        } else {
+          result += pending;
+          pending = '';
+          result += char;
+        }
       }
 
       return result;
