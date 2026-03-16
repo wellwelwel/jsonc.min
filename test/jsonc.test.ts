@@ -200,3 +200,31 @@ test('JSONC', () => {
     'stringify'
   );
 });
+
+test('JSONC: BOM', () => {
+  strict.deepStrictEqual(
+    JSONC.parse('\uFEFF{"a":1 /* comment */}'),
+    { a: 1 },
+    'parse: BOM + block comment'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('\uFEFF// comment\n{"a":1}'),
+    { a: 1 },
+    'parse: BOM + line comment'
+  );
+});
+
+test('JSONC: Trailing Commas', () => {
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":1, /* comment */}'),
+    { a: 1 },
+    'parse: trailing comma + block comment'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":1, // comment\n}'),
+    { a: 1 },
+    'parse: trailing comma + line comment'
+  );
+});

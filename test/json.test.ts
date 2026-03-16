@@ -165,3 +165,55 @@ test('JSON', () => {
     'stringify'
   );
 });
+
+test('JSON: BOM', () => {
+  strict.deepStrictEqual(
+    JSONC.parse('\uFEFF{"a":1}'),
+    { a: 1 },
+    'parse: BOM-prefixed object'
+  );
+
+  strict.equal(
+    JSONC.toJSON('\uFEFF{"a":1}'),
+    '{"a":1}',
+    'toJSON: BOM stripped'
+  );
+
+  strict.equal(
+    JSONC.minify('\uFEFF{ "a" : 1 }'),
+    '{"a":1}',
+    'minify: BOM-prefixed input'
+  );
+});
+
+test('JSON: Trailing Commas', () => {
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":1,}'),
+    { a: 1 },
+    'parse: trailing comma in object'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":1,"b":2,}'),
+    { a: 1, b: 2 },
+    'parse: trailing comma after multiple properties'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('[1,2,3,]'),
+    [1, 2, 3],
+    'parse: trailing comma in array'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":[1,],}'),
+    { a: [1] },
+    'parse: nested trailing commas'
+  );
+
+  strict.equal(
+    JSONC.toJSON('{"a":1,}'),
+    '{"a":1}',
+    'toJSON: trailing comma removed'
+  );
+});
