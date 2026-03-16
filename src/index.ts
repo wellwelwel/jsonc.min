@@ -8,6 +8,7 @@ export const JSONC = (() => {
 
       let inBlockComment = false;
       let inString = false;
+      let escaped = false;
       let skipChar = false;
       let pending = '';
       let result = '';
@@ -30,10 +31,11 @@ export const JSONC = (() => {
         }
 
         if (inString) {
-          if (char === '"' && input[i - 1] !== '\\') {
+          if (char === '"' && !escaped) {
             inString = false;
           }
 
+          escaped = char === '\\' && !escaped;
           result += char;
           continue;
         }

@@ -227,4 +227,10 @@ test('JSONC: Trailing Commas', () => {
     { a: 1 },
     'parse: trailing comma + line comment'
   );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":"b\\\\"} // comment'),
+    { a: 'b\\' },
+    'parse: escaped backslash before closing quote + line comment'
+  );
 });
