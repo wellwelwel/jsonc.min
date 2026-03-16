@@ -216,4 +216,28 @@ test('JSON: Trailing Commas', () => {
     '{"a":1}',
     'toJSON: trailing comma removed'
   );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":"b,"}'),
+    { a: 'b,' },
+    'parse: comma inside string before } is preserved'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":",]"}'),
+    { a: ',]' },
+    'parse: comma inside string before ] is preserved'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('[",}", 1]'),
+    [',}', 1],
+    'parse: string with trailing comma pattern in array'
+  );
+
+  strict.deepStrictEqual(
+    JSONC.parse('{"a":{"b":[1,],},}'),
+    { a: { b: [1] } },
+    'parse: deeply nested trailing commas'
+  );
 });
