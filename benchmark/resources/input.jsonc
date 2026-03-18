@@ -1,0 +1,147 @@
+﻿{
+  // Database configuration
+  "database": {
+    "host": "localhost", // primary host
+    "port": 5432, // default PostgreSQL port
+    "name": "myapp_production",
+    "credentials": {
+      "user": "admin",
+      "password": "s3cur3_p@ss!" // trailing comma in object
+    },
+    "pool": {
+      "min": 2,
+      "max": 20,
+      "idle_timeout": 30000 // milliseconds
+    },
+    "replicas": [
+      { "host": "replica-1.db.internal", "port": 5432, "weight": 5 },
+      { "host": "replica-2.db.internal", "port": 5432, "weight": 3 },
+      { "host": "replica-3.db.internal", "port": 5432, "weight": 2 }
+      // could add more replicas here
+    ]
+  },
+
+  // Server settings
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8080,
+    "workers": 4,
+    "keep_alive": 120,
+    "cors": {
+      "origins": [
+        "https://app.example.com",
+        "https://admin.example.com"
+        // "https://staging.example.com",
+      ],
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH" // trailing comma in array
+      ],
+      "headers": ["Authorization", "Content-Type", "X-Request-ID"],
+      "max_age": 86400
+    },
+    "rate_limit": {
+      "window_ms": 60000,
+      "max_requests": 1000
+    },
+    /*
+     * TLS configuration
+     * Certificates are auto-renewed via certbot
+     * See: https://internal.wiki/tls-setup
+     */
+    "tls": {
+      "enabled": true,
+      "cert_path": "/etc/ssl/certs/server.crt",
+      "key_path": "/etc/ssl/private/server.key",
+      "min_version": "TLSv1.3" /* only modern clients */
+    }
+  },
+
+  /*
+   * Feature flags
+   * Managed via internal dashboard at https://flags.internal
+   * Do NOT edit manually in production
+   */
+  "features": {
+    "dark_mode": true,
+    "beta_dashboard": false, // disabled until Q3
+    "experimental_search": true,
+    "maintenance_mode": false,
+    "ab_tests": {
+      "new_onboarding": { "enabled": true, "rollout": 0.25 },
+      "redesigned_nav": { "enabled": true, "rollout": 0.5 },
+      "ai_suggestions": { "enabled": false, "rollout": 0.0 }
+      // "checkout_v2": { "enabled": false, "rollout": 0.0 },
+    }
+  },
+
+  // Logging
+  "logging": {
+    "level": "info" /* could be: debug, info, warn, error */,
+    "format": "json",
+    "outputs": [
+      { "type": "stdout" },
+      {
+        "type": "file",
+        "path": "/var/log/app/app.log",
+        "max_size_mb": 100,
+        "rotate": 5
+      },
+      {
+        "type": "syslog",
+        "host": "logs.internal",
+        "port": 514,
+        "facility": "local0"
+      }
+      // { "type": "datadog", "api_key_env": "DD_API_KEY" },
+    ]
+  },
+
+  // Cache
+  "cache": {
+    "driver": "redis", // alternatives: memcached, in-memory
+    "url": "redis://cache.internal:6379/0",
+    "ttl": 3600,
+    "prefix": "myapp:",
+    "serializer": "msgpack"
+  },
+
+  // External services
+  "services": {
+    "email": {
+      "provider": "sendgrid",
+      "api_key_env": "SENDGRID_API_KEY",
+      "from": "noreply@example.com",
+      "templates": {
+        "welcome": "d-abc123",
+        "reset_password": "d-def456",
+        "invoice": "d-ghi789"
+      }
+    },
+    "storage": {
+      "provider": "s3",
+      "bucket": "myapp-uploads",
+      "region": "us-east-1",
+      "max_file_size_mb": 50,
+      "allowed_types": [
+        "image/png",
+        "image/jpeg",
+        "application/pdf"
+        // "video/mp4",
+      ]
+    },
+    "search": {
+      "provider": "elasticsearch",
+      "nodes": [
+        "https://es-node-1.internal:9200",
+        "https://es-node-2.internal:9200",
+        "https://es-node-3.internal:9200"
+      ],
+      "index_prefix": "myapp_",
+      "request_timeout": 5000
+    }
+  }
+}

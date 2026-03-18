@@ -227,6 +227,25 @@ export const getConfigs = async (customPath?: string) => {
 
 ---
 
+## Performance
+
+Each benchmark parses `10,000` iterations of mixed inputs (BOM-prefixed, block and line comments, trailing commas, and nested structures) comparing `JSONC.parse` from **jsonc.min** against `parse` from [**jsonc-parser**](https://github.com/microsoft/node-jsonc-parser) (**Microsoft**) through [**hyperfine**](https://github.com/sharkdp/hyperfine):
+
+| Benchmark          | jsonc-parser | jsonc.min |        Difference |
+| ------------------ | -----------: | --------: | ----------------: |
+| Parse JSONC inputs |     672.8 ms |  298.0 ms | **~2.26x faster** |
+| Parse JSON inputs  |     629.1 ms |  271.3 ms | **~2.32x faster** |
+
+- Only the `parse` method is compared.
+- See detailed results and how the benchmarks are run in the [**benchmark**](https://github.com/wellwelwel/jsonc.min/tree/main/benchmark) directory.
+
+> [!NOTE]
+>
+> Benchmarks ran on [**GitHub Actions**](https://github.com/wellwelwel/jsonc.min/blob/main/.github/workflows/ci_benchmark.yml) (`ubuntu-latest`) using **Node.js LTS**.
+> Results may vary depending on runner hardware and runtime version.
+
+---
+
 ## Acknowledgements
 
 [![Contributors](https://img.shields.io/github/contributors/wellwelwel/jsonc.min?label=Contributors)](https://github.com/wellwelwel/jsonc.min/graphs/contributors)
