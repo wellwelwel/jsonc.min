@@ -1,5 +1,5 @@
 export const JSONC = (() => {
-  function toJSON(content: string): string {
+  const toJSON = (content: string): string => {
     const input = content.charCodeAt(0) === 0xfeff ? content.slice(1) : content;
 
     const length = input.length;
@@ -75,33 +75,21 @@ export const JSONC = (() => {
     }
 
     return result;
-  }
+  };
 
-  function parse<T = unknown>(
+  const parse = <T = unknown>(
     text: string,
     reviver?: (this: unknown, key: string, value: unknown) => unknown
-  ): T {
-    return JSON.parse(toJSON(text), reviver);
-  }
+  ): T => JSON.parse(toJSON(text), reviver);
 
-  function stringify(
-    value: unknown,
-    replacer?: (this: unknown, key: string, value: unknown) => unknown,
-    space?: string | number
-  ): string;
-  function stringify(
-    value: unknown,
-    replacer?: (number | string)[] | null,
-    space?: string | number
-  ): string;
-  function stringify(
+  const stringify = (
     value: unknown,
     replacer?:
       | ((this: unknown, key: string, value: unknown) => unknown)
       | (number | string)[]
       | null,
     space?: string | number
-  ): string {
+  ): string => {
     const source = typeof value === 'string' ? parse(value) : value;
 
     if (typeof replacer === 'function') {
@@ -109,11 +97,10 @@ export const JSONC = (() => {
     }
 
     return JSON.stringify(source, replacer, space);
-  }
+  };
 
-  function minify(content: string): string {
-    return JSON.stringify(parse(content), null, 0);
-  }
+  const minify = (content: string): string =>
+    JSON.stringify(parse(content), null, 0);
 
   return { toJSON, parse, stringify, minify };
 })();
