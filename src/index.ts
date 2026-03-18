@@ -1,78 +1,110 @@
 export const JSONC = (() => {
+  const DOUBLE_QUOTE = 0x22;
+  const BACKSLASH = 0x5c;
+  const SLASH = 0x2f;
+  const ASTERISK = 0x2a;
+  const COMMA = 0x2c;
+  const CLOSE_BRACKET = 0x5d;
+  const CLOSE_BRACE = 0x7d;
+  const SPACE = 0x20;
+  const BOM = 0xfeff;
+
   const toJSON = (content: string): string => {
-    const input = content.charCodeAt(0) === 0xfeff ? content.slice(1) : content;
+    const offset = content.charCodeAt(0) === BOM ? 1 : 0;
+    const length = content.length;
 
-    const length = input.length;
-
-    let inBlockComment = false;
-    let inString = false;
-    let escaped = false;
-    let skipChar = false;
-    let pending = '';
     let result = '';
+    let segment = offset;
+    let pendingComma = false;
+    let cursor = offset;
 
-    for (let i = 0; i < length; i++) {
-      const char = input[i];
+    while (cursor < length) {
+      const current = content.charCodeAt(cursor);
 
-      if (skipChar) {
-        skipChar = false;
-        continue;
-      }
+      if (current === DOUBLE_QUOTE) {
+        if (pendingComma) {
+          result += ',' + content.slice(segment, cursor);
+          segment = cursor;
+          pendingComma = false;
+        }
 
-      if (inBlockComment) {
-        if (char === '*' && input[i + 1] === '/') {
-          inBlockComment = false;
-          skipChar = true;
+        cursor++;
+
+        for (;;) {
+          const closing = content.indexOf('"', cursor);
+
+          if (closing === -1) {
+            cursor = length;
+            break;
+          }
+
+          let backslashes = 0;
+
+          for (
+            let pos = closing - 1;
+            pos >= cursor && content.charCodeAt(pos) === BACKSLASH;
+            pos--
+          )
+            backslashes++;
+
+          cursor = closing + 1;
+
+          if ((backslashes & 1) === 0) break;
         }
 
         continue;
       }
 
-      if (inString) {
-        if (char === '"' && !escaped) {
-          inString = false;
+      if (current === SLASH) {
+        const next = content.charCodeAt(cursor + 1);
+
+        if (next === SLASH) {
+          result += content.slice(segment, cursor);
+          const endOfLine = content.indexOf('\n', cursor + 2);
+          cursor = endOfLine === -1 ? length : endOfLine;
+          segment = cursor;
+          continue;
         }
 
-        escaped = char === '\\' && !escaped;
-        result += char;
-        continue;
+        if (next === ASTERISK) {
+          result += content.slice(segment, cursor);
+          const endOfBlock = content.indexOf('*/', cursor + 2);
+          cursor = endOfBlock === -1 ? length : endOfBlock + 2;
+          segment = cursor;
+          continue;
+        }
       }
 
-      if (char === '"') {
-        result += pending;
-        pending = '';
-        inString = true;
-        result += char;
-        continue;
-      }
-
-      if (char === '/' && input[i + 1] === '*') {
-        inBlockComment = true;
-        skipChar = true;
-        continue;
-      }
-
-      if (char === '/' && input[i + 1] === '/') {
-        while (i < length && input[i] !== '\n') {
-          i++;
+      if (current === COMMA) {
+        if (pendingComma) {
+          result += ',' + content.slice(segment, cursor);
+        } else {
+          result += content.slice(segment, cursor);
         }
 
+        segment = cursor + 1;
+        pendingComma = true;
+        cursor++;
         continue;
       }
 
-      if (char === ',') {
-        pending = ',';
-      } else if (char === ']' || char === '}') {
-        pending = '';
-        result += char;
-      } else if (pending && char <= ' ') {
-        pending += char;
-      } else {
-        result += pending;
-        pending = '';
-        result += char;
+      if (current === CLOSE_BRACKET || current === CLOSE_BRACE) {
+        pendingComma = false;
+        cursor++;
+        continue;
       }
+
+      if (pendingComma && current > SPACE) {
+        result += ',' + content.slice(segment, cursor);
+        segment = cursor;
+        pendingComma = false;
+      }
+
+      cursor++;
     }
+
+    if (pendingComma) result += ',';
+    result += content.slice(segment, length);
 
     return result;
   };
