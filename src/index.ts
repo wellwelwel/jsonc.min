@@ -23,7 +23,7 @@ export const JSONC = (() => {
 
       if (current === DOUBLE_QUOTE) {
         if (pendingComma) {
-          result += ',' + content.slice(segment, cursor);
+          result += `,${content.slice(segment, cursor)}`;
           segment = cursor;
           pendingComma = false;
         }
@@ -44,12 +44,15 @@ export const JSONC = (() => {
             let pos = closing - 1;
             pos >= cursor && content.charCodeAt(pos) === BACKSLASH;
             pos--
-          )
+          ) {
             backslashes++;
+          }
 
           cursor = closing + 1;
 
-          if ((backslashes & 1) === 0) break;
+          if ((backslashes & 1) === 0) {
+            break;
+          }
         }
 
         continue;
@@ -77,7 +80,7 @@ export const JSONC = (() => {
 
       if (current === COMMA) {
         if (pendingComma) {
-          result += ',' + content.slice(segment, cursor);
+          result += `,${content.slice(segment, cursor)}`;
         } else {
           result += content.slice(segment, cursor);
         }
@@ -95,7 +98,7 @@ export const JSONC = (() => {
       }
 
       if (pendingComma && current > SPACE) {
-        result += ',' + content.slice(segment, cursor);
+        result += `,${content.slice(segment, cursor)}`;
         segment = cursor;
         pendingComma = false;
       }
@@ -103,7 +106,9 @@ export const JSONC = (() => {
       cursor++;
     }
 
-    if (pendingComma) result += ',';
+    if (pendingComma) {
+      result += ',';
+    }
     result += content.slice(segment, length);
 
     return result;
