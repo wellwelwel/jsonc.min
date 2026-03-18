@@ -1,0 +1,21 @@
+const fs = require('node:fs');
+const { parse } = require('jsonc-parser');
+
+const file = fs.readFileSync('resources/input.json', 'utf-8');
+
+const inputs = [
+  file,
+  '{"a":1}',
+  '{"a":1,"b":2}',
+  '[1,2,3]',
+  '{"nested":{"key":"value"}}',
+  '[{"a":1},{"b":2}]',
+  '{"arr":[1,2,3],"obj":{"x":true}}',
+  '["hello","world"]',
+];
+
+for (let i = 0; i < 10_000; i++) {
+  for (const input of inputs) {
+    parse(input);
+  }
+}
