@@ -1,0 +1,48 @@
+name: '🎖️ CI — Benchmark'
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+    name: Compare
+    steps:
+      - name: ➕ Actions - Checkout
+        uses: actions/checkout@v4
+
+      - name: ➕ Actions - Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          check-latest: true
+          node-version: lts/*
+
+      - name: ➕ Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-linux-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-linux-
+
+      - name: ➕ Actions — Setup Hyperfine
+        run: cargo install --locked hyperfine
+
+      - name: ➕ Cache dependencies (Benchmark)
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-benchmark-${{ hashFiles('benchmark/package-lock.json') }}
+          restore-keys: npm-benchmark-
+
+      - name: 📦 Installing Dependencies
+        run: npm ci
+
+      - name: 🚀 Building jsonc.min
+        run: npm run build
+
+      - name: 🎖️ Rock it
+        run: npm run benchmark

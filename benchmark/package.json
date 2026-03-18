@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "npm run jsonc && npm run json",
+    "jsonc": "hyperfine --warmup 3 -n 'jsonc-parser (JSONC)' -n 'jsonc.min (JSONC)' 'node jsonc/jsonc-parser.js' 'node jsonc/jsonc.min.js'",
+    "json": "hyperfine --warmup 3 -n 'jsonc-parser (JSON)' -n 'jsonc.min (JSON)' 'node json/jsonc-parser.js' 'node json/jsonc.min.js'"
+  },
+  "dependencies": {
+    "jsonc-parser": "^3.3.1",
+    "jsonc.min": "^1.1.1"
+  }
+}

@@ -36,7 +36,8 @@
     "lint:fix": "npx @biomejs/biome lint --write && prettier --write .github/workflows/*.yml .",
     "update": "pu minor && npm i && npm audit fix",
     "postupdate": "npm run lint:fix",
-    "size": "ls -lh lib/index.js | awk '{print $5}'"
+    "size": "ls -lh lib/index.js | awk '{print $5}'",
+    "benchmark": "npm --prefix benchmark start"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
