@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/wellwelwel/jsonc.min/compare/v1.1.1...v1.1.2) (2026-03-18)
+
+
+### Performance Improvements
+
+* improve jsonc.min structure ([#26](https://github.com/wellwelwel/jsonc.min/issues/26)) ([8f45c80](https://github.com/wellwelwel/jsonc.min/commit/8f45c801fe9b7ea0463c3fe74115d969ec4a67ef))
+* use an AST-based approach ([#29](https://github.com/wellwelwel/jsonc.min/issues/29)) ([1d0b2d0](https://github.com/wellwelwel/jsonc.min/commit/1d0b2d0bc87e98981b1ce3ab0a6f6e903c15f6e4))
+
 ## [1.1.1](https://github.com/wellwelwel/jsonc.min/compare/v1.1.0...v1.1.1) (2026-03-16)
 
 
