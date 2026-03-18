@@ -41,6 +41,9 @@ jobs:
       - name: 📦 Installing Dependencies
         run: npm ci
 
+      - name: 📦 Installing Dependencies (Benchmark)
+        run: npm ci --prefix benchmark
+
       - name: 🚀 Building jsonc.min
         run: npm run build
 
