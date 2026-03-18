@@ -109,6 +109,7 @@ export const JSONC = (() => {
     if (pendingComma) {
       result += ',';
     }
+
     result += content.slice(segment, length);
 
     return result;
